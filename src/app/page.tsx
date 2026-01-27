@@ -14,8 +14,6 @@ import {
   Check,
   PhoneCall,
   Phone,
-  Utensils,
-  Camera,
   Mail
 } from "lucide-react"
 import { cn } from "@/lib/utils"
@@ -260,14 +258,17 @@ const ContentEmergency = () => (
     <h2 className="text-2xl font-bold text-red-600">Números de Emergencia</h2>
     <div className="grid gap-3">
       {[
-        { name: "Policía", number: "911" },
+        { name: "Central Emergencias Regional", number: "911" },
         { name: "Bomberos", number: "100" },
-        { name: "Ambulancia (SAME)", number: "107" },
-        { name: "Hospital Fernández", number: "4808-2600" },
+        { name: "Policía", number: "101" },
+        { name: "Protección Civil", number: "103" },
+        { name: "SIEN (Sistema Integrado de Emergencias Neuquén)", number: "107" },
+        { name: "Hospital Ramón Carrillo", number: "2972 426033" },
+        { name: "Clínica Chapelco", number: "2972 429132" },
       ].map((item) => (
         <div key={item.name} className="flex items-center justify-between p-4 border border-red-100 bg-red-50 rounded-xl">
-          <span className="font-medium text-red-900">{item.name}</span>
-          <a href={`tel:${item.number}`} className="flex items-center gap-2 font-bold text-red-600 bg-white px-3 py-1.5 rounded-lg shadow-sm">
+          <span className="font-medium text-red-900 text-sm max-w-[60%]">{item.name}</span>
+          <a href={`tel:${item.number.replace(/\s/g, '')}`} className="flex items-center gap-2 font-bold text-red-600 bg-white px-3 py-1.5 rounded-lg shadow-sm whitespace-nowrap">
             <Phone size={14} />
             {item.number}
           </a>
@@ -282,44 +283,13 @@ const ContentEmergency = () => (
 )
 
 const ContentGuide = () => (
-  <div className="space-y-6">
-    <h2 className="text-2xl font-bold">Guía Local</h2>
-    
-    <div>
-      <div className="flex items-center gap-2 mb-3 text-lg font-semibold text-pink-600">
-        <Utensils size={20} />
-        <h3>Gastronomía</h3>
-      </div>
-      <div className="space-y-3">
-        {[
-          { name: "Don Julio Parrilla", desc: "La mejor carne. Reserva necesaria." },
-          { name: "Cuervo Café", desc: "Café de especialidad a 2 cuadras." },
-          { name: "Pizzería Güerrín", desc: "Clásica pizza porteña." },
-        ].map(place => (
-          <div key={place.name} className="p-3 bg-neutral-50 rounded-lg">
-            <div className="font-bold text-neutral-800">{place.name}</div>
-            <div className="text-sm text-neutral-500">{place.desc}</div>
-          </div>
-        ))}
-      </div>
+  <div className="flex flex-col items-center justify-center py-12 text-center space-y-4">
+    <div className="p-4 bg-pink-100 text-pink-600 rounded-full">
+      <Clock size={48} />
     </div>
-
     <div>
-      <div className="flex items-center gap-2 mb-3 text-lg font-semibold text-pink-600">
-        <Camera size={20} />
-        <h3>Actividades</h3>
-      </div>
-      <div className="space-y-3">
-        {[
-          { name: "Jardín Japonés", desc: "Hermoso parque para caminar." },
-          { name: "MALBA", desc: "Museo de arte latinoamericano." },
-        ].map(place => (
-          <div key={place.name} className="p-3 bg-neutral-50 rounded-lg">
-            <div className="font-bold text-neutral-800">{place.name}</div>
-            <div className="text-sm text-neutral-500">{place.desc}</div>
-          </div>
-        ))}
-      </div>
+      <h2 className="text-2xl font-bold text-neutral-900">Guía Turística</h2>
+      <p className="text-neutral-500 mt-2">Disponible próximamente</p>
     </div>
   </div>
 )
