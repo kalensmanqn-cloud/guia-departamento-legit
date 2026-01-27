@@ -17,6 +17,7 @@ import {
   Mountain,
   Info,
   ArrowLeft,
+  Star,
 
   Phone,
   MessageCircle,
@@ -97,6 +98,7 @@ const translations = {
     },
     guide: {
       title: "Guía Turística",
+      back: "Volver",
       menu: {
         benefits: "Beneficios",
         gastronomy: "Gastronomía",
@@ -105,19 +107,35 @@ const translations = {
       },
       benefits: {
         title: "Beneficios",
-        items: [
-          { name: "Alquiler de Equipos", desc: "10% de descuento en rental local" },
-          { name: "Chocolate Artesanal", desc: "Degustación gratuita" }
-        ]
+        items: []
       },
       gastronomy: {
         title: "Gastronomía",
         items: [
-          { name: "Vieja Deli", type: "Restaurante • Café", link: "https://maps.app.goo.gl/qUJk5ppyGcVuYn54A" },
-          { name: "La Costa del Pueblo", type: "Restaurante", link: "https://maps.app.goo.gl/TZ5jZ99n7a6Vf3Jn6" },
-          { name: "Pantera Bar Bistro", type: "Bar • Bistro • Sushi", link: "https://maps.app.goo.gl/n1NfFaQxvWFLXuwL6" },
-          { name: "Dublin South Pub", type: "Bar • Cervecería • Restaurante", link: "https://maps.app.goo.gl/emeAhms196HWYyu29" },
-          { name: "Ulises", type: "Restaurante", link: "https://maps.app.goo.gl/P1g7iWjiTw79Tm6m9" }
+          { name: "Próspero", type: "Restaurante", link: "https://maps.app.goo.gl/od3RoZE9LrfUbAPZ9", rating: "5.0" },
+          { name: "Vieja Deli", type: "Restaurante • Café", link: "https://maps.app.goo.gl/qUJk5ppyGcVuYn54A", rating: "4.4" },
+          { name: "Unser Traum", type: "Café", rating: "3.8", branches: [
+            { name: "Suc. San Martín", link: "https://maps.app.goo.gl/zEU6d2VRagr13GUh6" },
+            { name: "Suc. Roca", link: "https://maps.app.goo.gl/yinYKqgcAzVXYkgKA" }
+          ]},
+          { name: "La Costa del Pueblo", type: "Restaurante", link: "https://maps.app.goo.gl/TZ5jZ99n7a6Vf3Jn6", rating: "3.9" },
+          { name: "Pantera Bar Bistro", type: "Bar • Bistro • Sushi", link: "https://maps.app.goo.gl/n1NfFaQxvWFLXuwL6", rating: "4.7" },
+          { name: "Dublin South Pub", type: "Bar • Café • Restaurante", link: "https://maps.app.goo.gl/emeAhms196HWYyu29", rating: "3.5" },
+          { name: "Ulises", type: "Restaurante", link: "https://maps.app.goo.gl/P1g7iWjiTw79Tm6m9", rating: "4.6" },
+          { name: "Piscis Parrilla", type: "Parrilla", rating: "4.1", branches: [
+            { name: "Suc. Mariano Moreno", link: "https://maps.app.goo.gl/6NCQBK8nLynEvKiL7" },
+            { name: "Suc. Belgrano", link: "https://maps.app.goo.gl/4dtidiWw2TEPbw3w7" }
+          ]},
+          { name: "Pizza Cala", type: "Pizzería", link: "https://maps.app.goo.gl/NmgTeax3D138rvcw8", rating: "4.4" },
+          { name: "Genaro Pizza", type: "Pizzería", link: "https://maps.app.goo.gl/H2P7YkbPHVCmd7aK6", rating: "4.4" },
+          { name: "Gina Pizzeria", type: "Pizzería", link: "https://maps.app.goo.gl/wiyf5ZhwaWmgperx7", rating: "4.6" },
+          { name: "Forastera Café", type: "Café", link: "https://maps.app.goo.gl/E8vgZg28ncK5j2yJ9", rating: "4.8" },
+          { name: "Abolengo", type: "Café", link: "https://maps.app.goo.gl/DYuwzUmKrw3uD3Fa7", rating: "4.3" },
+          { name: "Fiora Café", type: "Café", link: "https://maps.app.goo.gl/TEMHySoe9hYgC26S8", rating: "4.4" },
+          { name: "Fassbier Cervecería", type: "Cervecería", link: "https://maps.app.goo.gl/HcWP9zVN1w9fdDj87", rating: "4.6" },
+          { name: "Cervecería Piedra Buena", type: "Cervecería", link: "https://maps.app.goo.gl/shPZobj7JEoAzQnS6", rating: "4.3" },
+          { name: "Jabalí", type: "Cervecería • Bar", link: "https://maps.app.goo.gl/Tg7Qd2rwpo6E5vvC8", rating: "4.1" },
+          { name: "Parador Slonjah", type: "Cervecería • Bar", link: "https://maps.app.goo.gl/UPHwZ4XhHmxnM2C2A", rating: "4.3" }
         ]
       },
       activities: {
@@ -201,6 +219,7 @@ const translations = {
     },
     guide: {
       title: "Tourist Guide",
+      back: "Back",
       menu: {
         benefits: "Benefits",
         gastronomy: "Gastronomy",
@@ -209,19 +228,35 @@ const translations = {
       },
       benefits: {
         title: "Benefits",
-        items: [
-          { name: "Equipment Rental", desc: "10% discount at local rental" },
-          { name: "Artisan Chocolate", desc: "Free tasting" }
-        ]
+        items: []
       },
       gastronomy: {
         title: "Gastronomy",
         items: [
-          { name: "Vieja Deli", type: "Restaurant • Cafe", link: "https://maps.app.goo.gl/qUJk5ppyGcVuYn54A" },
-          { name: "La Costa del Pueblo", type: "Restaurant", link: "https://maps.app.goo.gl/TZ5jZ99n7a6Vf3Jn6" },
-          { name: "Pantera Bar Bistro", type: "Bar • Bistro • Sushi", link: "https://maps.app.goo.gl/n1NfFaQxvWFLXuwL6" },
-          { name: "Dublin South Pub", type: "Bar • Brewery • Restaurant", link: "https://maps.app.goo.gl/emeAhms196HWYyu29" },
-          { name: "Ulises", type: "Restaurant", link: "https://maps.app.goo.gl/P1g7iWjiTw79Tm6m9" }
+          { name: "Próspero", type: "Restaurant", link: "https://maps.app.goo.gl/od3RoZE9LrfUbAPZ9", rating: "5.0" },
+          { name: "Vieja Deli", type: "Restaurant • Cafe", link: "https://maps.app.goo.gl/qUJk5ppyGcVuYn54A", rating: "4.4" },
+          { name: "Unser Traum", type: "Cafe", rating: "3.8", branches: [
+            { name: "Br. San Martín", link: "https://maps.app.goo.gl/zEU6d2VRagr13GUh6" },
+            { name: "Br. Roca", link: "https://maps.app.goo.gl/yinYKqgcAzVXYkgKA" }
+          ]},
+          { name: "La Costa del Pueblo", type: "Restaurant", link: "https://maps.app.goo.gl/TZ5jZ99n7a6Vf3Jn6", rating: "3.9" },
+          { name: "Pantera Bar Bistro", type: "Bar • Bistro • Sushi", link: "https://maps.app.goo.gl/n1NfFaQxvWFLXuwL6", rating: "4.7" },
+          { name: "Dublin South Pub", type: "Bar • Cafe • Restaurant", link: "https://maps.app.goo.gl/emeAhms196HWYyu29", rating: "3.5" },
+          { name: "Ulises", type: "Restaurant", link: "https://maps.app.goo.gl/P1g7iWjiTw79Tm6m9", rating: "4.6" },
+          { name: "Piscis Parrilla", type: "Grill", rating: "4.1", branches: [
+            { name: "Br. Mariano Moreno", link: "https://maps.app.goo.gl/6NCQBK8nLynEvKiL7" },
+            { name: "Br. Belgrano", link: "https://maps.app.goo.gl/4dtidiWw2TEPbw3w7" }
+          ]},
+          { name: "Pizza Cala", type: "Pizzeria", link: "https://maps.app.goo.gl/NmgTeax3D138rvcw8", rating: "4.4" },
+          { name: "Genaro Pizza", type: "Pizzeria", link: "https://maps.app.goo.gl/H2P7YkbPHVCmd7aK6", rating: "4.4" },
+          { name: "Gina Pizzeria", type: "Pizzeria", link: "https://maps.app.goo.gl/wiyf5ZhwaWmgperx7", rating: "4.6" },
+          { name: "Forastera Café", type: "Cafe", link: "https://maps.app.goo.gl/E8vgZg28ncK5j2yJ9", rating: "4.8" },
+          { name: "Abolengo", type: "Cafe", link: "https://maps.app.goo.gl/DYuwzUmKrw3uD3Fa7", rating: "4.3" },
+          { name: "Fiora Café", type: "Cafe", link: "https://maps.app.goo.gl/TEMHySoe9hYgC26S8", rating: "4.4" },
+          { name: "Fassbier Cervecería", type: "Brewery", link: "https://maps.app.goo.gl/HcWP9zVN1w9fdDj87", rating: "4.6" },
+          { name: "Cervecería Piedra Buena", type: "Brewery", link: "https://maps.app.goo.gl/shPZobj7JEoAzQnS6", rating: "4.3" },
+          { name: "Jabalí", type: "Brewery • Bar", link: "https://maps.app.goo.gl/Tg7Qd2rwpo6E5vvC8", rating: "4.1" },
+          { name: "Parador Slonjah", type: "Brewery • Bar", link: "https://maps.app.goo.gl/UPHwZ4XhHmxnM2C2A", rating: "4.3" }
         ]
       },
       activities: {
@@ -479,7 +514,7 @@ const ContentGuide = ({ t }: { t: typeof translations.es }) => {
         className="flex items-center gap-2 text-neutral-500 dark:text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-200 mb-4 transition-colors"
       >
         <ArrowLeft size={20} />
-        <span className="font-medium">Volver</span>
+        <span className="font-medium">{t.guide.back}</span>
       </button>
     )
 
@@ -494,13 +529,11 @@ const ContentGuide = ({ t }: { t: typeof translations.es }) => {
               </span>
               {t.guide.benefits.title}
             </h2>
-            <div className="grid gap-4">
-              {t.guide.benefits.items.map((item, i) => (
-                <div key={i} className="p-4 bg-neutral-50 dark:bg-neutral-800 rounded-xl">
-                  <h3 className="font-bold text-lg dark:text-white">{item.name}</h3>
-                  <p className="text-neutral-600 dark:text-neutral-300">{item.desc}</p>
-                </div>
-              ))}
+            <div className="flex flex-col items-center justify-center py-12 text-center space-y-4">
+               <div className="p-4 bg-neutral-100 dark:bg-neutral-800 text-neutral-400 rounded-full">
+                 <Clock size={48} />
+               </div>
+               <p className="text-neutral-500 dark:text-neutral-400 font-medium">{t.comingSoon}</p>
             </div>
           </div>
         )
@@ -515,27 +548,76 @@ const ContentGuide = ({ t }: { t: typeof translations.es }) => {
               {t.guide.gastronomy.title}
             </h2>
             <div className="grid gap-4">
-              {t.guide.gastronomy.items.map((item, i) => (
-                <a 
-                  key={i} 
-                  href={item.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-4 bg-neutral-50 dark:bg-neutral-800 rounded-xl hover:bg-sky-50 dark:hover:bg-neutral-700 transition-colors group"
-                >
-                  <div className="flex justify-between items-start">
-                    <h3 className="font-bold text-lg dark:text-white group-hover:text-sky-700 dark:group-hover:text-sky-400 transition-colors flex items-center gap-2">
-                       {item.name}
-                       <MapIcon size={14} className="opacity-50 group-hover:opacity-100" />
-                    </h3>
-                  </div>
-                  <div className="mt-2 flex flex-wrap gap-2">
-                    {item.type.split("•").map((tag, idx) => (
-                         <span key={idx} className="text-xs bg-sky-100 dark:bg-sky-900/50 text-sky-700 dark:text-sky-300 px-2 py-1 rounded-full">{tag.trim()}</span>
-                    ))}
-                  </div>
-                </a>
-              ))}
+              {t.guide.gastronomy.items.map((item: any, i: number) => {
+                if (item.branches) {
+                  return (
+                    <div key={i} className="p-4 bg-neutral-50 dark:bg-neutral-800 rounded-xl">
+                       <div className="flex justify-between items-start mb-3">
+                         <div>
+                            <h3 className="font-bold text-lg dark:text-white flex items-center gap-2">
+                                {item.name}
+                            </h3>
+                            {item.rating && (
+                                <div className="flex items-center gap-1 mt-1">
+                                    <Star size={14} className="fill-amber-400 text-amber-400" />
+                                    <span className="text-sm font-semibold text-neutral-700 dark:text-neutral-300">{item.rating}</span>
+                                </div>
+                            )}
+                         </div>
+                         <div className="flex flex-wrap gap-2 justify-end">
+                            {item.type.split("•").map((tag: string, idx: number) => (
+                                 <span key={idx} className="text-xs bg-sky-100 dark:bg-sky-900/50 text-sky-700 dark:text-sky-300 px-2 py-1 rounded-full whitespace-nowrap">{tag.trim()}</span>
+                            ))}
+                          </div>
+                       </div>
+                       <div className="flex flex-col gap-2">
+                          {item.branches.map((branch: any, bIdx: number) => (
+                            <a
+                              key={bIdx}
+                              href={branch.link}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex items-center justify-between p-3 bg-white dark:bg-neutral-900 rounded-lg border border-neutral-200 dark:border-neutral-700 hover:border-sky-300 dark:hover:border-sky-700 hover:bg-sky-50 dark:hover:bg-neutral-800 transition-all group"
+                            >
+                                <span className="text-sm font-medium text-neutral-700 dark:text-neutral-300 group-hover:text-sky-700 dark:group-hover:text-sky-400">{branch.name}</span>
+                                <MapIcon size={14} className="text-neutral-400 group-hover:text-sky-600 dark:group-hover:text-sky-400" />
+                            </a>
+                          ))}
+                       </div>
+                    </div>
+                  )
+                }
+
+                return (
+                  <a 
+                    key={i} 
+                    href={item.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-4 bg-neutral-50 dark:bg-neutral-800 rounded-xl hover:bg-sky-50 dark:hover:bg-neutral-700 transition-colors group"
+                  >
+                    <div className="flex justify-between items-start">
+                      <div>
+                        <h3 className="font-bold text-lg dark:text-white group-hover:text-sky-700 dark:group-hover:text-sky-400 transition-colors flex items-center gap-2">
+                           {item.name}
+                           <MapIcon size={14} className="opacity-50 group-hover:opacity-100" />
+                        </h3>
+                        {item.rating && (
+                            <div className="flex items-center gap-1 mt-1">
+                                <Star size={14} className="fill-amber-400 text-amber-400" />
+                                <span className="text-sm font-semibold text-neutral-700 dark:text-neutral-300 group-hover:text-sky-700 dark:group-hover:text-sky-400">{item.rating}</span>
+                            </div>
+                        )}
+                      </div>
+                    </div>
+                    <div className="mt-2 flex flex-wrap gap-2">
+                      {item.type.split("•").map((tag: string, idx: number) => (
+                           <span key={idx} className="text-xs bg-sky-100 dark:bg-sky-900/50 text-sky-700 dark:text-sky-300 px-2 py-1 rounded-full">{tag.trim()}</span>
+                      ))}
+                    </div>
+                  </a>
+                )
+              })}
             </div>
           </div>
         )
