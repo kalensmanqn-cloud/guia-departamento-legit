@@ -12,8 +12,9 @@ import {
   X,
   Copy,
   Check,
-  PhoneCall,
+
   Phone,
+  MessageCircle,
   Mail,
   Languages,
   Moon,
@@ -76,7 +77,7 @@ const translations = {
       title: "Conexión Wifi",
       network: "Red (Network)",
       password: "Contraseña (Password)",
-      scan: "Escanea el código QR que se encuentra en la mesa del comedor para conectar automáticamente."
+      //scan: "Escanea el código QR que se encuentra en la mesa del comedor para conectar automáticamente."
     },
     host: {
       title: "Tus Anfitrionas",
@@ -288,23 +289,23 @@ const ContentWifi = ({ t }: { t: typeof translations.es }) => (
         <div>
           <div className="text-xs font-semibold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 mb-1">{t.wifi.network}</div>
           <div className="flex items-center text-xl font-bold text-emerald-900 dark:text-emerald-200">
-            <span>MiDepartamento_5G</span>
-            <CopyButton text="MiDepartamento_5G" label={t.copy} />
+            <span>cotemax_3a1</span>
+            <CopyButton text="cotemax_3a1" label={t.copy} />
           </div>
         </div>
         <div className="w-full h-px bg-emerald-200 dark:bg-emerald-900/50" />
         <div>
           <div className="text-xs font-semibold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 mb-1">{t.wifi.password}</div>
           <div className="flex items-center text-xl font-bold text-emerald-900 dark:text-emerald-200">
-            <span>WifiSeguro2024</span>
-            <CopyButton text="WifiSeguro2024" label={t.copy} />
+            <span>cote035b</span>
+            <CopyButton text="cote035b" label={t.copy} />
           </div>
         </div>
       </div>
     </div>
-    <p className="text-center text-sm text-neutral-500 dark:text-neutral-400">
+    {/* <p className="text-center text-sm text-neutral-500 dark:text-neutral-400">
       {t.wifi.scan}
-    </p>
+    </p> */}
   </div>
 )
 
@@ -323,16 +324,16 @@ const ContentHost = ({ t }: { t: typeof translations.es }) => (
     <div className="space-y-3">
       <div className="space-y-1">
         <p className="text-xs font-semibold text-neutral-500 uppercase tracking-wider pl-1">Marcela</p>
-        <a href="tel:+5491149288359" className="flex items-center gap-3 p-3 bg-neutral-50 dark:bg-neutral-800 rounded-xl hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors">
-          <PhoneCall size={20} className="text-neutral-400" />
+        <a href="https://wa.me/5491149288359" className="flex items-center gap-3 p-3 bg-neutral-50 dark:bg-neutral-800 rounded-xl hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors">
+          <MessageCircle size={20} className="text-neutral-400" />
           <span className="font-medium text-neutral-700 dark:text-neutral-200">+54 9 11 4928-8359</span>
         </a>
       </div>
       
       <div className="space-y-1">
         <p className="text-xs font-semibold text-neutral-500 uppercase tracking-wider pl-1">Natalia</p>
-        <a href="tel:+5491121546599" className="flex items-center gap-3 p-3 bg-neutral-50 dark:bg-neutral-800 rounded-xl hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors">
-          <PhoneCall size={20} className="text-neutral-400" />
+        <a href="https://wa.me/5491121546599" className="flex items-center gap-3 p-3 bg-neutral-50 dark:bg-neutral-800 rounded-xl hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors">
+          <MessageCircle size={20} className="text-neutral-400" />
           <span className="font-medium text-neutral-700 dark:text-neutral-200">+54 9 11 2154-6599</span>
         </a>
       </div>
