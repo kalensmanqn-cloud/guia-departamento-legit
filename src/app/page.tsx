@@ -85,7 +85,7 @@ const translations = {
     emergency: {
       title: "Números de Emergencia",
       addressTitle: "Dirección del departamento",
-      address: "Av. Libertador 1234, Piso 5, Depto B.\nBuenos Aires, Argentina."
+      address: "Tte. Gral. Roca 938, piso 3, departamento 302\nEdificio Pequeña Comarca (entre calles Elordi y Belgrano)\nSan Martín de los Andes, Neuquén"
     },
     guide: {
       title: "Guía Turística"
@@ -152,7 +152,7 @@ const translations = {
     emergency: {
       title: "Emergency Numbers",
       addressTitle: "Apartment Address",
-      address: "Av. Libertador 1234, Floor 5, Apt B.\nBuenos Aires, Argentina."
+      address: "Tte. Gral. Roca 938, Floor 3, Apt 302\nEdificio Pequeña Comarca (between Elordi and Belgrano)\nSan Martín de los Andes, Neuquén"
     },
     guide: {
       title: "Tourist Guide"
@@ -417,7 +417,7 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-neutral-50 text-neutral-900 pb-20">
       {/* Hero Section */}
-      <div className="relative h-64 bg-slate-900 overflow-hidden">
+      <div className="relative h-[50vh] min-h-[400px] bg-slate-900 overflow-hidden">
         {/* Background Image */}
         <div 
             className="absolute inset-0 bg-cover bg-center"
