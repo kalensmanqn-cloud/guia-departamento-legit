@@ -409,7 +409,7 @@ export default function Home() {
       document.documentElement.classList.add("dark")
     } else {
       setTheme("light")
-      document.documentElement.classList.remove("dark")
+      document.documentElement.classList.add("light")
     }
   }, [])
 
@@ -420,11 +420,9 @@ export default function Home() {
   const toggleTheme = () => {
     const newTheme = theme === "light" ? "dark" : "light"
     setTheme(newTheme)
-    if (newTheme === "dark") {
-      document.documentElement.classList.add("dark")
-    } else {
-      document.documentElement.classList.remove("dark")
-    }
+    
+    document.documentElement.classList.remove("light", "dark")
+    document.documentElement.classList.add(newTheme)
   }
 
   const renderContent = (id: CategoryId) => {
