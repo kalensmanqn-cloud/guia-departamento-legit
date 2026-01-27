@@ -423,11 +423,10 @@ export default function Home() {
             className="absolute inset-0 bg-cover bg-center"
             style={{ 
               backgroundImage: 'url(/hero-bg.jpg)',
-              opacity: 0.85
             }} 
         />
         {/* Gradient Overlay for Text Readability */}
-         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+         <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />
 
         {/* Language Toggle */}
         <div className="absolute top-4 right-4 z-30">

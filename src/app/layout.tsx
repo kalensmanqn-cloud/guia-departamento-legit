@@ -15,6 +15,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Bienvenido | Guía de Alojamiento",
   description: "Todo lo que necesitas saber para tu estadía.",
+  icons: {
+    icon: "/icon.svg",
+  },
 };
 
 export default function RootLayout({
