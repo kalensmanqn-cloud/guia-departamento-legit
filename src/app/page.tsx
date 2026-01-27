@@ -422,7 +422,7 @@ export default function Home() {
         <div 
             className="absolute inset-0 bg-cover bg-center"
             style={{ 
-              backgroundImage: 'url(/hero-bg.jpg)',
+              backgroundImage: 'url(/hero-bg.png)',
             }} 
         />
         {/* Gradient Overlay for Text Readability */}
