@@ -119,7 +119,7 @@ const translations = {
             { name: "Suc. Roca", link: "https://maps.app.goo.gl/yinYKqgcAzVXYkgKA" }
           ]},
           { name: "La Costa del Pueblo", type: "Restaurante", link: "https://maps.app.goo.gl/TZ5jZ99n7a6Vf3Jn6", rating: "3.9" },
-          { name: "Pantera Bar Bistro", type: "Bar • Bistro • Sushi", link: "https://maps.app.goo.gl/n1NfFaQxvWFLXuwL6", rating: "4.7" },
+          { name: "Pantera Bar Bistro", type: "Bar • Restaurante • Sushi", link: "https://maps.app.goo.gl/n1NfFaQxvWFLXuwL6", rating: "4.7" },
           { name: "Dublin South Pub", type: "Bar • Café • Restaurante", link: "https://maps.app.goo.gl/emeAhms196HWYyu29", rating: "3.5" },
           { name: "Ulises", type: "Restaurante", link: "https://maps.app.goo.gl/P1g7iWjiTw79Tm6m9", rating: "4.6" },
           { name: "Piscis Parrilla", type: "Parrilla", rating: "4.1", branches: [
@@ -240,7 +240,7 @@ const translations = {
             { name: "Br. Roca", link: "https://maps.app.goo.gl/yinYKqgcAzVXYkgKA" }
           ]},
           { name: "La Costa del Pueblo", type: "Restaurant", link: "https://maps.app.goo.gl/TZ5jZ99n7a6Vf3Jn6", rating: "3.9" },
-          { name: "Pantera Bar Bistro", type: "Bar • Bistro • Sushi", link: "https://maps.app.goo.gl/n1NfFaQxvWFLXuwL6", rating: "4.7" },
+          { name: "Pantera Bar Bistro", type: "Bar • Restaurant • Sushi", link: "https://maps.app.goo.gl/n1NfFaQxvWFLXuwL6", rating: "4.7" },
           { name: "Dublin South Pub", type: "Bar • Cafe • Restaurant", link: "https://maps.app.goo.gl/emeAhms196HWYyu29", rating: "3.5" },
           { name: "Ulises", type: "Restaurant", link: "https://maps.app.goo.gl/P1g7iWjiTw79Tm6m9", rating: "4.6" },
           { name: "Piscis Parrilla", type: "Grill", rating: "4.1", branches: [
@@ -499,6 +499,7 @@ const ContentEmergency = ({ t }: { t: typeof translations.es }) => (
 
 const ContentGuide = ({ t }: { t: typeof translations.es }) => {
   const [view, setView] = useState<"menu" | "benefits" | "gastronomy" | "activities" | "info">("menu")
+  const [activeFilter, setActiveFilter] = useState<string | null>(null)
 
   const menuItems = [
     { id: "benefits", label: t.guide.menu.benefits, icon: Ticket, color: "bg-red-100 dark:bg-red-950/50 text-red-600 dark:text-red-400", delay: 0 },
@@ -506,6 +507,19 @@ const ContentGuide = ({ t }: { t: typeof translations.es }) => {
     { id: "activities", label: t.guide.menu.activities, icon: Mountain, color: "bg-emerald-100 dark:bg-emerald-950/50 text-emerald-600 dark:text-emerald-400", delay: 0.2 },
     { id: "info", label: t.guide.menu.info, icon: Info, color: "bg-amber-100 dark:bg-amber-950/50 text-amber-600 dark:text-amber-400", delay: 0.3 },
   ] as const
+
+  // Extract unique tags for gastronomy
+  const gastronomyTags = Array.from(new Set(
+    t.guide.gastronomy.items.flatMap((item: any) => 
+      item.type.split("•").map((tag: string) => tag.trim())
+    )
+  )).sort()
+
+  const filteredGastronomyItems = activeFilter
+    ? t.guide.gastronomy.items.filter((item: any) => 
+        item.type.split("•").map((tag: string) => tag.trim()).includes(activeFilter)
+      )
+    : t.guide.gastronomy.items
 
   const renderSubView = () => {
     const BackButton = () => (
@@ -538,6 +552,7 @@ const ContentGuide = ({ t }: { t: typeof translations.es }) => {
           </div>
         )
       case "gastronomy":
+        const allLabel = t.guide.back === "Volver" ? "Todos" : "All"
         return (
           <div>
             <BackButton />
@@ -547,8 +562,38 @@ const ContentGuide = ({ t }: { t: typeof translations.es }) => {
               </span>
               {t.guide.gastronomy.title}
             </h2>
+            
+            {/* Filters */}
+            <div className="flex overflow-x-auto pb-4 gap-2 mb-2 no-scrollbar">
+              <button
+                onClick={() => setActiveFilter(null)}
+                className={cn(
+                  "px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors",
+                  activeFilter === null
+                    ? "bg-sky-600 text-white"
+                    : "bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700"
+                )}
+              >
+                {allLabel}
+              </button>
+              {gastronomyTags.map((tag: string) => (
+                <button
+                  key={tag}
+                  onClick={() => setActiveFilter(tag === activeFilter ? null : tag)}
+                  className={cn(
+                    "px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors",
+                    activeFilter === tag
+                      ? "bg-sky-600 text-white"
+                      : "bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700"
+                  )}
+                >
+                  {tag}
+                </button>
+              ))}
+            </div>
+
             <div className="grid gap-4">
-              {t.guide.gastronomy.items.map((item: any, i: number) => {
+              {filteredGastronomyItems.map((item: any, i: number) => {
                 if (item.branches) {
                   return (
                     <div key={i} className="p-4 bg-neutral-50 dark:bg-neutral-800 rounded-xl">
