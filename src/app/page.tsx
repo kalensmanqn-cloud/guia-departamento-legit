@@ -12,6 +12,11 @@ import {
   X,
   Copy,
   Check,
+  Utensils,
+  Ticket,
+  Mountain,
+  Info,
+  ArrowLeft,
 
   Phone,
   MessageCircle,
@@ -91,7 +96,44 @@ const translations = {
       address: "Tte. Gral. Roca 938, piso 3, departamento 302\nEdificio Pequeña Comarca (entre calles Elordi y Belgrano)\nSan Martín de los Andes, Neuquén"
     },
     guide: {
-      title: "Guía Turística"
+      title: "Guía Turística",
+      menu: {
+        benefits: "Beneficios",
+        gastronomy: "Gastronomía",
+        activities: "Actividades",
+        info: "Información útil"
+      },
+      benefits: {
+        title: "Beneficios",
+        items: [
+          { name: "Alquiler de Equipos", desc: "10% de descuento en rental local" },
+          { name: "Chocolate Artesanal", desc: "Degustación gratuita" }
+        ]
+      },
+      gastronomy: {
+        title: "Gastronomía",
+        items: [
+          { name: "Vieja Deli", type: "Restaurante • Café", link: "https://maps.app.goo.gl/qUJk5ppyGcVuYn54A" },
+          { name: "La Costa del Pueblo", type: "Restaurante", link: "https://maps.app.goo.gl/TZ5jZ99n7a6Vf3Jn6" },
+          { name: "Pantera Bar Bistro", type: "Bar • Bistro • Sushi", link: "https://maps.app.goo.gl/n1NfFaQxvWFLXuwL6" },
+          { name: "Dublin South Pub", type: "Bar • Cervecería • Restaurante", link: "https://maps.app.goo.gl/emeAhms196HWYyu29" },
+          { name: "Ulises", type: "Restaurante", link: "https://maps.app.goo.gl/P1g7iWjiTw79Tm6m9" }
+        ]
+      },
+      activities: {
+        title: "Actividades",
+        items: [
+          { name: "Trekking al Mirador", difficulty: "Media", duration: "2 hs" },
+          { name: "Lago Lácar", difficulty: "Baja", duration: "Libre" }
+        ]
+      },
+      info: {
+        title: "Información útil",
+        items: [
+          { name: "Farmacia de Turno", desc: "Consultar cartelera en el centro" },
+          { name: "Supermercado", desc: "Abierto hasta las 21:00 hs" }
+        ]
+      }
     }
   },
   en: {
@@ -158,7 +200,44 @@ const translations = {
       address: "Tte. Gral. Roca 938, Floor 3, Apt 302\nEdificio Pequeña Comarca (between Elordi and Belgrano)\nSan Martín de los Andes, Neuquén"
     },
     guide: {
-      title: "Tourist Guide"
+      title: "Tourist Guide",
+      menu: {
+        benefits: "Benefits",
+        gastronomy: "Gastronomy",
+        activities: "Activities",
+        info: "Useful Info"
+      },
+      benefits: {
+        title: "Benefits",
+        items: [
+          { name: "Equipment Rental", desc: "10% discount at local rental" },
+          { name: "Artisan Chocolate", desc: "Free tasting" }
+        ]
+      },
+      gastronomy: {
+        title: "Gastronomy",
+        items: [
+          { name: "Vieja Deli", type: "Restaurant • Cafe", link: "https://maps.app.goo.gl/qUJk5ppyGcVuYn54A" },
+          { name: "La Costa del Pueblo", type: "Restaurant", link: "https://maps.app.goo.gl/TZ5jZ99n7a6Vf3Jn6" },
+          { name: "Pantera Bar Bistro", type: "Bar • Bistro • Sushi", link: "https://maps.app.goo.gl/n1NfFaQxvWFLXuwL6" },
+          { name: "Dublin South Pub", type: "Bar • Brewery • Restaurant", link: "https://maps.app.goo.gl/emeAhms196HWYyu29" },
+          { name: "Ulises", type: "Restaurant", link: "https://maps.app.goo.gl/P1g7iWjiTw79Tm6m9" }
+        ]
+      },
+      activities: {
+        title: "Activities",
+        items: [
+          { name: "Viewpoint Trekking", difficulty: "Medium", duration: "2 hrs" },
+          { name: "Lácar Lake", difficulty: "Easy", duration: "Free" }
+        ]
+      },
+      info: {
+        title: "Useful Info",
+        items: [
+          { name: "Duty Pharmacy", desc: "Check billboard in downtown" },
+          { name: "Supermarket", desc: "Open until 9:00 PM" }
+        ]
+      }
     }
   }
 }
@@ -383,17 +462,167 @@ const ContentEmergency = ({ t }: { t: typeof translations.es }) => (
   </div>
 )
 
-const ContentGuide = ({ t }: { t: typeof translations.es }) => (
-  <div className="flex flex-col items-center justify-center py-12 text-center space-y-4">
-    <div className="p-4 bg-pink-100 dark:bg-pink-950/50 text-pink-600 dark:text-pink-400 rounded-full">
-      <Clock size={48} />
+const ContentGuide = ({ t }: { t: typeof translations.es }) => {
+  const [view, setView] = useState<"menu" | "benefits" | "gastronomy" | "activities" | "info">("menu")
+
+  const menuItems = [
+    { id: "benefits", label: t.guide.menu.benefits, icon: Ticket, color: "bg-red-100 dark:bg-red-950/50 text-red-600 dark:text-red-400", delay: 0 },
+    { id: "gastronomy", label: t.guide.menu.gastronomy, icon: Utensils, color: "bg-sky-100 dark:bg-sky-950/50 text-sky-600 dark:text-sky-400", delay: 0.1 },
+    { id: "activities", label: t.guide.menu.activities, icon: Mountain, color: "bg-emerald-100 dark:bg-emerald-950/50 text-emerald-600 dark:text-emerald-400", delay: 0.2 },
+    { id: "info", label: t.guide.menu.info, icon: Info, color: "bg-amber-100 dark:bg-amber-950/50 text-amber-600 dark:text-amber-400", delay: 0.3 },
+  ] as const
+
+  const renderSubView = () => {
+    const BackButton = () => (
+      <button 
+        onClick={() => setView("menu")}
+        className="flex items-center gap-2 text-neutral-500 dark:text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-200 mb-4 transition-colors"
+      >
+        <ArrowLeft size={20} />
+        <span className="font-medium">Volver</span>
+      </button>
+    )
+
+    switch (view) {
+      case "benefits":
+        return (
+          <div>
+            <BackButton />
+            <h2 className="text-2xl font-bold mb-4 dark:text-white flex items-center gap-3">
+              <span className="p-2 bg-red-100 dark:bg-red-950/50 text-red-600 dark:text-red-400 rounded-lg">
+                <Ticket size={24} />
+              </span>
+              {t.guide.benefits.title}
+            </h2>
+            <div className="grid gap-4">
+              {t.guide.benefits.items.map((item, i) => (
+                <div key={i} className="p-4 bg-neutral-50 dark:bg-neutral-800 rounded-xl">
+                  <h3 className="font-bold text-lg dark:text-white">{item.name}</h3>
+                  <p className="text-neutral-600 dark:text-neutral-300">{item.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )
+      case "gastronomy":
+        return (
+          <div>
+            <BackButton />
+            <h2 className="text-2xl font-bold mb-4 dark:text-white flex items-center gap-3">
+              <span className="p-2 bg-sky-100 dark:bg-sky-950/50 text-sky-600 dark:text-sky-400 rounded-lg">
+                <Utensils size={24} />
+              </span>
+              {t.guide.gastronomy.title}
+            </h2>
+            <div className="grid gap-4">
+              {t.guide.gastronomy.items.map((item, i) => (
+                <a 
+                  key={i} 
+                  href={item.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-4 bg-neutral-50 dark:bg-neutral-800 rounded-xl hover:bg-sky-50 dark:hover:bg-neutral-700 transition-colors group"
+                >
+                  <div className="flex justify-between items-start">
+                    <h3 className="font-bold text-lg dark:text-white group-hover:text-sky-700 dark:group-hover:text-sky-400 transition-colors flex items-center gap-2">
+                       {item.name}
+                       <MapIcon size={14} className="opacity-50 group-hover:opacity-100" />
+                    </h3>
+                  </div>
+                  <div className="mt-2 flex flex-wrap gap-2">
+                    {item.type.split("•").map((tag, idx) => (
+                         <span key={idx} className="text-xs bg-sky-100 dark:bg-sky-900/50 text-sky-700 dark:text-sky-300 px-2 py-1 rounded-full">{tag.trim()}</span>
+                    ))}
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        )
+      case "activities":
+        return (
+          <div>
+            <BackButton />
+            <h2 className="text-2xl font-bold mb-4 dark:text-white flex items-center gap-3">
+              <span className="p-2 bg-emerald-100 dark:bg-emerald-950/50 text-emerald-600 dark:text-emerald-400 rounded-lg">
+                <Mountain size={24} />
+              </span>
+              {t.guide.activities.title}
+            </h2>
+            <div className="grid gap-4">
+              {t.guide.activities.items.map((item, i) => (
+                <div key={i} className="p-4 bg-neutral-50 dark:bg-neutral-800 rounded-xl">
+                  <h3 className="font-bold text-lg dark:text-white">{item.name}</h3>
+                  <div className="flex gap-3 mt-2 text-sm text-neutral-500 dark:text-neutral-400">
+                    <span className="flex items-center gap-1"><MapIcon size={14} /> {item.difficulty}</span>
+                    <span className="flex items-center gap-1"><Clock size={14} /> {item.duration}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )
+      case "info":
+        return (
+          <div>
+            <BackButton />
+            <h2 className="text-2xl font-bold mb-4 dark:text-white flex items-center gap-3">
+              <span className="p-2 bg-amber-100 dark:bg-amber-950/50 text-amber-600 dark:text-amber-400 rounded-lg">
+                <Info size={24} />
+              </span>
+              {t.guide.info.title}
+            </h2>
+            <div className="grid gap-4">
+              {t.guide.info.items.map((item, i) => (
+                <div key={i} className="p-4 bg-neutral-50 dark:bg-neutral-800 rounded-xl">
+                  <h3 className="font-bold text-lg dark:text-white">{item.name}</h3>
+                  <p className="text-neutral-600 dark:text-neutral-300">{item.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )
+      default:
+        return null
+    }
+  }
+
+  return (
+    <div className="h-full pt-6"> {/* Added pt-6 for close button space */}
+      <AnimatePresence mode="wait">
+        {view === "menu" ? (
+          <motion.div 
+            key="menu"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            className="grid grid-cols-2 gap-3 h-full"
+          >
+             {menuItems.map((item) => (
+               <button
+                 key={item.id}
+                 onClick={() => setView(item.id)}
+                 className={`flex flex-col items-center justify-center p-4 rounded-2xl transition-transform hover:scale-[1.02] active:scale-95 ${item.color} shadow-sm border border-black/5 dark:border-white/5 aspect-[4/3]`}
+               >
+                 <item.icon size={32} strokeWidth={1.5} />
+                 <span className="mt-2 font-bold text-sm text-center leading-tight">{item.label}</span>
+               </button>
+             ))}
+          </motion.div>
+        ) : (
+          <motion.div
+            key="content"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -20 }}
+          >
+            {renderSubView()}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
-    <div>
-      <h2 className="text-2xl font-bold text-neutral-900 dark:text-white">{t.guide.title}</h2>
-      <p className="text-neutral-500 dark:text-neutral-400 mt-2">{t.comingSoon}</p>
-    </div>
-  </div>
-)
+  )
+}
 
 // --- Main Page ---
 
