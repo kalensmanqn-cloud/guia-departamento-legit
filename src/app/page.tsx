@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import {
   BookOpen,
@@ -15,7 +15,9 @@ import {
   PhoneCall,
   Phone,
   Mail,
-  Languages
+  Languages,
+  Moon,
+  Sun
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -168,15 +170,16 @@ interface Category {
   id: CategoryId
   icon: React.ElementType
   color: string
+  darkColor: string
 }
 
 const categoriesData: Category[] = [
-  { id: "rules", icon: BookOpen, color: "bg-orange-100 text-orange-600" },
-  { id: "checkin", icon: Clock, color: "bg-blue-100 text-blue-600" },
-  { id: "wifi", icon: Wifi, color: "bg-emerald-100 text-emerald-600" },
-  { id: "host", icon: User, color: "bg-violet-100 text-violet-600" },
-  { id: "emergency", icon: Siren, color: "bg-red-100 text-red-600" },
-  { id: "guide", icon: MapIcon, color: "bg-pink-100 text-pink-600" },
+  { id: "rules", icon: BookOpen, color: "bg-orange-100 text-orange-600", darkColor: "dark:bg-orange-950/50 dark:text-orange-400" },
+  { id: "checkin", icon: Clock, color: "bg-blue-100 text-blue-600", darkColor: "dark:bg-blue-950/50 dark:text-blue-400" },
+  { id: "wifi", icon: Wifi, color: "bg-emerald-100 text-emerald-600", darkColor: "dark:bg-emerald-950/50 dark:text-emerald-400" },
+  { id: "host", icon: User, color: "bg-violet-100 text-violet-600", darkColor: "dark:bg-violet-950/50 dark:text-violet-400" },
+  { id: "emergency", icon: Siren, color: "bg-red-100 text-red-600", darkColor: "dark:bg-red-950/50 dark:text-red-400" },
+  { id: "guide", icon: MapIcon, color: "bg-pink-100 text-pink-600", darkColor: "dark:bg-pink-950/50 dark:text-pink-400" },
 ]
 
 // --- Components ---
@@ -197,13 +200,13 @@ function Modal({ isOpen, onClose, children }: { isOpen: boolean; onClose: () => 
             initial={{ opacity: 0, y: 100, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 100, scale: 0.95 }}
-            className="fixed inset-x-4 bottom-4 md:inset-auto md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:w-full md:max-w-xl md:h-auto max-h-[85vh] overflow-y-auto bg-white rounded-3xl shadow-2xl z-50 p-6"
+            className="fixed inset-x-4 bottom-4 md:inset-auto md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:w-full md:max-w-xl md:h-auto max-h-[85vh] overflow-y-auto bg-white dark:bg-neutral-900 rounded-3xl shadow-2xl z-50 p-6"
           >
             <button
               onClick={onClose}
-              className="absolute top-4 right-4 p-2 bg-neutral-100 rounded-full hover:bg-neutral-200 transition-colors"
+              className="absolute top-4 right-4 p-2 bg-neutral-100 dark:bg-neutral-800 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors"
             >
-              <X size={20} className="text-neutral-600" />
+              <X size={20} className="text-neutral-600 dark:text-neutral-300" />
             </button>
             {children}
           </motion.div>
@@ -225,7 +228,7 @@ function CopyButton({ text, label }: { text: string, label?: string }) {
   return (
     <button
       onClick={handleCopy}
-      className="ml-2 p-1.5 rounded-md hover:bg-neutral-100 transition-colors text-neutral-500"
+      className="ml-2 p-1.5 rounded-md hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors text-neutral-500 dark:text-neutral-400"
       title={label || "Copiar"}
     >
       {copied ? <Check size={16} className="text-green-500" /> : <Copy size={16} />}
@@ -237,8 +240,8 @@ function CopyButton({ text, label }: { text: string, label?: string }) {
 
 const ContentRules = ({ t }: { t: typeof translations.es }) => (
   <div className="space-y-4">
-    <h2 className="text-2xl font-bold mb-4">{t.rules.title}</h2>
-    <ul className="space-y-3 text-neutral-600">
+    <h2 className="text-2xl font-bold mb-4 dark:text-white">{t.rules.title}</h2>
+    <ul className="space-y-3 text-neutral-600 dark:text-neutral-300">
       {t.rules.items.map((item, index) => (
         <li key={index} className="flex items-start gap-3">
           <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-neutral-400 shrink-0" />
@@ -251,22 +254,22 @@ const ContentRules = ({ t }: { t: typeof translations.es }) => (
 
 const ContentCheckin = ({ t }: { t: typeof translations.es }) => (
   <div className="space-y-6">
-    <h2 className="text-2xl font-bold">{t.checkin.title}</h2>
+    <h2 className="text-2xl font-bold dark:text-white">{t.checkin.title}</h2>
     <div className="grid grid-cols-2 gap-4">
-      <div className="p-4 bg-blue-50 rounded-xl text-center">
-        <div className="text-sm text-blue-600 font-medium mb-1">{t.checkin.checkinTitle}</div>
-        <div className="text-2xl font-bold text-blue-900">13:00</div>
-        <div className="text-xs text-blue-500 mt-1">{t.checkin.checkinSub}</div>
+      <div className="p-4 bg-blue-50 dark:bg-blue-950/30 rounded-xl text-center">
+        <div className="text-sm text-blue-600 dark:text-blue-400 font-medium mb-1">{t.checkin.checkinTitle}</div>
+        <div className="text-2xl font-bold text-blue-900 dark:text-blue-200">13:00</div>
+        <div className="text-xs text-blue-500 dark:text-blue-400 mt-1">{t.checkin.checkinSub}</div>
       </div>
-      <div className="p-4 bg-orange-50 rounded-xl text-center">
-        <div className="text-sm text-orange-600 font-medium mb-1">{t.checkin.checkoutTitle}</div>
-        <div className="text-2xl font-bold text-orange-900">10:00</div>
-        <div className="text-xs text-orange-500 mt-1">{t.checkin.checkoutSub}</div>
+      <div className="p-4 bg-orange-50 dark:bg-orange-950/30 rounded-xl text-center">
+        <div className="text-sm text-orange-600 dark:text-orange-400 font-medium mb-1">{t.checkin.checkoutTitle}</div>
+        <div className="text-2xl font-bold text-orange-900 dark:text-orange-200">10:00</div>
+        <div className="text-xs text-orange-500 dark:text-orange-400 mt-1">{t.checkin.checkoutSub}</div>
       </div>
     </div>
-    <div className="bg-neutral-50 p-4 rounded-xl">
-      <h3 className="font-semibold mb-2">{t.checkin.instructionsTitle}</h3>
-      <ul className="text-neutral-600 text-sm list-none space-y-1">
+    <div className="bg-neutral-50 dark:bg-neutral-800 p-4 rounded-xl">
+      <h3 className="font-semibold mb-2 dark:text-white">{t.checkin.instructionsTitle}</h3>
+      <ul className="text-neutral-600 dark:text-neutral-300 text-sm list-none space-y-1">
         {t.checkin.instructions.map((inst, i) => (
           <li key={i} dangerouslySetInnerHTML={{ 
             __html: inst.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') 
@@ -279,27 +282,27 @@ const ContentCheckin = ({ t }: { t: typeof translations.es }) => (
 
 const ContentWifi = ({ t }: { t: typeof translations.es }) => (
   <div className="space-y-6">
-    <h2 className="text-2xl font-bold">{t.wifi.title}</h2>
-    <div className="bg-emerald-50 p-6 rounded-2xl border border-emerald-100">
+    <h2 className="text-2xl font-bold dark:text-white">{t.wifi.title}</h2>
+    <div className="bg-emerald-50 dark:bg-emerald-950/30 p-6 rounded-2xl border border-emerald-100 dark:border-emerald-900/50">
       <div className="space-y-4">
         <div>
-          <div className="text-xs font-semibold uppercase tracking-wider text-emerald-600 mb-1">{t.wifi.network}</div>
-          <div className="flex items-center text-xl font-bold text-emerald-900">
+          <div className="text-xs font-semibold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 mb-1">{t.wifi.network}</div>
+          <div className="flex items-center text-xl font-bold text-emerald-900 dark:text-emerald-200">
             <span>MiDepartamento_5G</span>
             <CopyButton text="MiDepartamento_5G" label={t.copy} />
           </div>
         </div>
-        <div className="w-full h-px bg-emerald-200" />
+        <div className="w-full h-px bg-emerald-200 dark:bg-emerald-900/50" />
         <div>
-          <div className="text-xs font-semibold uppercase tracking-wider text-emerald-600 mb-1">{t.wifi.password}</div>
-          <div className="flex items-center text-xl font-bold text-emerald-900">
+          <div className="text-xs font-semibold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 mb-1">{t.wifi.password}</div>
+          <div className="flex items-center text-xl font-bold text-emerald-900 dark:text-emerald-200">
             <span>WifiSeguro2024</span>
             <CopyButton text="WifiSeguro2024" label={t.copy} />
           </div>
         </div>
       </div>
     </div>
-    <p className="text-center text-sm text-neutral-500">
+    <p className="text-center text-sm text-neutral-500 dark:text-neutral-400">
       {t.wifi.scan}
     </p>
   </div>
@@ -307,43 +310,43 @@ const ContentWifi = ({ t }: { t: typeof translations.es }) => (
 
 const ContentHost = ({ t }: { t: typeof translations.es }) => (
   <div className="space-y-6">
-    <h2 className="text-2xl font-bold">{t.host.title}</h2>
+    <h2 className="text-2xl font-bold dark:text-white">{t.host.title}</h2>
     <div className="flex items-center gap-4 mb-6">
-      <div className="w-16 h-16 rounded-full bg-violet-100 flex items-center justify-center text-violet-600">
+      <div className="w-16 h-16 rounded-full bg-violet-100 dark:bg-violet-950/50 flex items-center justify-center text-violet-600 dark:text-violet-400">
         <User size={32} />
       </div>
       <div>
-        <h3 className="text-lg font-bold">Marcela y Natalia</h3>
-        <p className="text-neutral-500 text-sm">{t.host.superhost}</p>
+        <h3 className="text-lg font-bold dark:text-white">Marcela y Natalia</h3>
+        <p className="text-neutral-500 dark:text-neutral-400 text-sm">{t.host.superhost}</p>
       </div>
     </div>
     <div className="space-y-3">
       <div className="space-y-1">
         <p className="text-xs font-semibold text-neutral-500 uppercase tracking-wider pl-1">Marcela</p>
-        <a href="tel:+5491149288359" className="flex items-center gap-3 p-3 bg-neutral-50 rounded-xl hover:bg-neutral-100 transition-colors">
+        <a href="tel:+5491149288359" className="flex items-center gap-3 p-3 bg-neutral-50 dark:bg-neutral-800 rounded-xl hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors">
           <PhoneCall size={20} className="text-neutral-400" />
-          <span className="font-medium text-neutral-700">+54 9 11 4928-8359</span>
+          <span className="font-medium text-neutral-700 dark:text-neutral-200">+54 9 11 4928-8359</span>
         </a>
       </div>
       
       <div className="space-y-1">
         <p className="text-xs font-semibold text-neutral-500 uppercase tracking-wider pl-1">Natalia</p>
-        <a href="tel:+5491121546599" className="flex items-center gap-3 p-3 bg-neutral-50 rounded-xl hover:bg-neutral-100 transition-colors">
+        <a href="tel:+5491121546599" className="flex items-center gap-3 p-3 bg-neutral-50 dark:bg-neutral-800 rounded-xl hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors">
           <PhoneCall size={20} className="text-neutral-400" />
-          <span className="font-medium text-neutral-700">+54 9 11 2154-6599</span>
+          <span className="font-medium text-neutral-700 dark:text-neutral-200">+54 9 11 2154-6599</span>
         </a>
       </div>
 
       <div className="pt-2">
          <p className="text-xs font-semibold text-neutral-500 uppercase tracking-wider pl-1 mb-1">{t.host.email}</p>
-         <div className="flex items-center gap-3 p-3 bg-neutral-50 rounded-xl">
+         <div className="flex items-center gap-3 p-3 bg-neutral-50 dark:bg-neutral-800 rounded-xl">
            <Mail size={20} className="text-neutral-400" />
-           <span className="font-medium text-neutral-700 text-sm break-all">kalen.sma.nqn@gmail.com</span>
+           <span className="font-medium text-neutral-700 dark:text-neutral-200 text-sm break-all">kalen.sma.nqn@gmail.com</span>
            <CopyButton text="kalen.sma.nqn@gmail.com" label={t.copy} />
          </div>
       </div>
 
-      <p className="text-sm text-neutral-500 px-2 text-center mt-4 whitespace-pre-line">
+      <p className="text-sm text-neutral-500 dark:text-neutral-400 px-2 text-center mt-4 whitespace-pre-line">
         {t.host.availability}
       </p>
     </div>
@@ -352,7 +355,7 @@ const ContentHost = ({ t }: { t: typeof translations.es }) => (
 
 const ContentEmergency = ({ t }: { t: typeof translations.es }) => (
   <div className="space-y-4">
-    <h2 className="text-2xl font-bold text-red-600">{t.emergency.title}</h2>
+    <h2 className="text-2xl font-bold text-red-600 dark:text-red-500">{t.emergency.title}</h2>
     <div className="grid gap-3">
       {[
         { name: "Central Emergencias Regional", number: "911" },
@@ -363,30 +366,30 @@ const ContentEmergency = ({ t }: { t: typeof translations.es }) => (
         { name: "Hospital Ramón Carrillo", number: "2972 426033" },
         { name: "Clínica Chapelco", number: "2972 429132" },
       ].map((item) => (
-        <div key={item.name} className="flex items-center justify-between p-4 border border-red-100 bg-red-50 rounded-xl">
-          <span className="font-medium text-red-900 text-sm max-w-[60%]">{item.name}</span>
-          <a href={`tel:${item.number.replace(/\s/g, '')}`} className="flex items-center gap-2 font-bold text-red-600 bg-white px-3 py-1.5 rounded-lg shadow-sm whitespace-nowrap">
+        <div key={item.name} className="flex items-center justify-between p-4 border border-red-100 dark:border-red-900/30 bg-red-50 dark:bg-red-950/20 rounded-xl">
+          <span className="font-medium text-red-900 dark:text-red-200 text-sm max-w-[60%]">{item.name}</span>
+          <a href={`tel:${item.number.replace(/\s/g, '')}`} className="flex items-center gap-2 font-bold text-red-600 dark:text-red-400 bg-white dark:bg-neutral-900 px-3 py-1.5 rounded-lg shadow-sm whitespace-nowrap">
             <Phone size={14} />
             {item.number}
           </a>
         </div>
       ))}
     </div>
-    <div className="mt-4 p-4 bg-neutral-100 rounded-xl">
-      <h3 className="font-semibold text-sm mb-1">{t.emergency.addressTitle}</h3>
-      <p className="text-neutral-600 whitespace-pre-line">{t.emergency.address}</p>
+    <div className="mt-4 p-4 bg-neutral-100 dark:bg-neutral-800 rounded-xl">
+      <h3 className="font-semibold text-sm mb-1 dark:text-white">{t.emergency.addressTitle}</h3>
+      <p className="text-neutral-600 dark:text-neutral-300 whitespace-pre-line">{t.emergency.address}</p>
     </div>
   </div>
 )
 
 const ContentGuide = ({ t }: { t: typeof translations.es }) => (
   <div className="flex flex-col items-center justify-center py-12 text-center space-y-4">
-    <div className="p-4 bg-pink-100 text-pink-600 rounded-full">
+    <div className="p-4 bg-pink-100 dark:bg-pink-950/50 text-pink-600 dark:text-pink-400 rounded-full">
       <Clock size={48} />
     </div>
     <div>
-      <h2 className="text-2xl font-bold text-neutral-900">{t.guide.title}</h2>
-      <p className="text-neutral-500 mt-2">{t.comingSoon}</p>
+      <h2 className="text-2xl font-bold text-neutral-900 dark:text-white">{t.guide.title}</h2>
+      <p className="text-neutral-500 dark:text-neutral-400 mt-2">{t.comingSoon}</p>
     </div>
   </div>
 )
@@ -396,10 +399,32 @@ const ContentGuide = ({ t }: { t: typeof translations.es }) => (
 export default function Home() {
   const [activeId, setActiveId] = useState<CategoryId | null>(null)
   const [lang, setLang] = useState<Language>("es")
+  const [theme, setTheme] = useState<"light" | "dark">("light")
   const t = translations[lang]
+
+  useEffect(() => {
+    // Check system preference
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      setTheme("dark")
+      document.documentElement.classList.add("dark")
+    } else {
+      setTheme("light")
+      document.documentElement.classList.remove("dark")
+    }
+  }, [])
 
   const toggleLanguage = () => {
     setLang(current => current === "es" ? "en" : "es")
+  }
+
+  const toggleTheme = () => {
+    const newTheme = theme === "light" ? "dark" : "light"
+    setTheme(newTheme)
+    if (newTheme === "dark") {
+      document.documentElement.classList.add("dark")
+    } else {
+      document.documentElement.classList.remove("dark")
+    }
   }
 
   const renderContent = (id: CategoryId) => {
@@ -415,7 +440,7 @@ export default function Home() {
   }
 
   return (
-    <main className="min-h-screen bg-neutral-50 text-neutral-900 pb-20">
+    <main className="min-h-screen bg-neutral-50 dark:bg-neutral-950 text-neutral-900 dark:text-neutral-100 pb-20 transition-colors duration-300">
       {/* Hero Section */}
       <div className="relative h-[50vh] min-h-[400px] bg-slate-900 overflow-hidden">
         {/* Background Image */}
@@ -428,8 +453,17 @@ export default function Home() {
         {/* Gradient Overlay for Text Readability */}
          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />
 
-        {/* Language Toggle */}
-        <div className="absolute top-4 right-4 z-30">
+        {/* Top Controls */}
+        <div className="absolute top-4 right-4 z-30 flex gap-2">
+            
+            <button 
+                onClick={toggleTheme}
+                className="flex items-center justify-center w-9 h-9 bg-white/20 backdrop-blur-md border border-white/30 rounded-full text-white hover:bg-white/30 transition-colors"
+                title={theme === 'light' ? 'Modo Oscuro' : 'Modo Claro'}
+            >
+                {theme === 'light' ? <Moon size={18} /> : <Sun size={18} />}
+            </button>
+
             <button 
                 onClick={toggleLanguage}
                 className="flex items-center gap-2 bg-white/20 backdrop-blur-md border border-white/30 px-3 py-1.5 rounded-full text-white font-medium hover:bg-white/30 transition-colors"
@@ -461,12 +495,15 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
               onClick={() => setActiveId(category.id)}
-              className="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-shadow flex flex-col items-center justify-center gap-4 text-center aspect-square md:aspect-auto md:h-48 group"
+              className="bg-white dark:bg-neutral-900 p-6 rounded-2xl shadow-lg hover:shadow-xl dark:shadow-neutral-900/50 transition-all flex flex-col items-center justify-center gap-4 text-center aspect-square md:aspect-auto md:h-48 group"
             >
-              <div className={cn("p-4 rounded-full transition-transform group-hover:scale-110 duration-300", category.color)}>
+              <div className={cn("p-4 rounded-full transition-transform group-hover:scale-110 duration-300", 
+                category.color,
+                category.darkColor
+              )}>
                 <category.icon size={32} />
               </div>
-              <span className="font-semibold text-neutral-800">{t.categories[category.id]}</span>
+              <span className="font-semibold text-neutral-800 dark:text-neutral-200">{t.categories[category.id]}</span>
             </motion.button>
           ))}
         </div>
