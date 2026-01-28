@@ -699,13 +699,19 @@ const ContentGuide = ({ t }: { t: typeof translations.es }) => {
               </span>
               {t.guide.info.title}
             </h2>
-            <div className="grid gap-4">
-              {t.guide.info.items.map((item, i) => (
-                <div key={i} className="p-4 bg-neutral-50 dark:bg-neutral-800 rounded-xl">
-                  <h3 className="font-bold text-lg dark:text-white">{item.name}</h3>
-                  <p className="text-neutral-600 dark:text-neutral-300">{item.desc}</p>
-                </div>
-              ))}
+            
+            {/* Map Embed */}
+            <div className="w-full h-[600px] rounded-xl overflow-hidden border border-neutral-200 dark:border-neutral-800 bg-neutral-100 dark:bg-neutral-800">
+              <iframe 
+                src="https://www.google.com/maps/d/embed?mid=1fmuUFrdJxKfAydNX6PfSvUzDowZrXdQ&ehbc=2E312F&noprof=1" 
+                width="100%" 
+                height="600" 
+                className="w-full h-full"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                title="Mapa de Información Útil"
+              ></iframe>
             </div>
           </div>
         )
