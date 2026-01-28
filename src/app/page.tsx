@@ -24,7 +24,9 @@ import {
   Mail,
   Languages,
   Moon,
-  Sun
+  Sun,
+  ChevronDown,
+  ChevronUp
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -126,6 +128,14 @@ const translations = {
             { name: "Suc. Mariano Moreno", link: "https://maps.app.goo.gl/6NCQBK8nLynEvKiL7" },
             { name: "Suc. Belgrano", link: "https://maps.app.goo.gl/4dtidiWw2TEPbw3w7" }
           ]},
+          { name: "La Vieja Aldea", type: "Chocolatería", link: "https://maps.app.goo.gl/BPJ7QcuvU8HHWbNv6", rating: "4.8" },
+          { name: "Mamuschka", type: "Chocolatería • Heladería", link: "https://maps.app.goo.gl/xZom5UJynhuuySuT7", rating: "4.7" },
+          { name: "DELTURISTA", type: "Chocolatería • Heladería", link: "https://maps.app.goo.gl/NN158AZY5wz9ZJeEA", rating: "4.4" },
+          { name: "Pata Negra", type: "Chocolatería • Heladería", link: "https://maps.app.goo.gl/xkVBrrgz3ac5bvCGA", rating: "4.6" },
+          { name: "Riche", type: "Chocolatería • Heladería", link: "https://maps.app.goo.gl/M7crnZHtFCanuaTD8", rating: "4.3" },
+          { name: "Mamusia", type: "Chocolatería • Heladería", link: "https://maps.app.goo.gl/aACSwvDrruNzUWaw9", rating: "4.5" },
+          { name: "Grido", type: "Heladería", link: "https://maps.app.goo.gl/bcnxLZAnbNfV3hBx5", rating: "4.2" },
+          { name: "Heladería San Martín", type: "Heladería", link: "https://maps.app.goo.gl/gQFMm54HDXA8qzwe7", rating: "4.5" },
           { name: "Pizza Cala", type: "Pizzería", link: "https://maps.app.goo.gl/NmgTeax3D138rvcw8", rating: "4.4" },
           { name: "Genaro Pizza", type: "Pizzería", link: "https://maps.app.goo.gl/H2P7YkbPHVCmd7aK6", rating: "4.4" },
           { name: "Gina Pizzeria", type: "Pizzería", link: "https://maps.app.goo.gl/wiyf5ZhwaWmgperx7", rating: "4.6" },
@@ -247,6 +257,14 @@ const translations = {
             { name: "Br. Mariano Moreno", link: "https://maps.app.goo.gl/6NCQBK8nLynEvKiL7" },
             { name: "Br. Belgrano", link: "https://maps.app.goo.gl/4dtidiWw2TEPbw3w7" }
           ]},
+          { name: "La Vieja Aldea", type: "Chocolate Shop", link: "https://maps.app.goo.gl/BPJ7QcuvU8HHWbNv6", rating: "4.8" },
+          { name: "Mamuschka", type: "Chocolate Shop • Ice Cream Shop", link: "https://maps.app.goo.gl/xZom5UJynhuuySuT7", rating: "4.7" },
+          { name: "DELTURISTA", type: "Chocolate Shop • Ice Cream Shop", link: "https://maps.app.goo.gl/NN158AZY5wz9ZJeEA", rating: "4.4" },
+          { name: "Pata Negra", type: "Chocolate Shop • Ice Cream Shop", link: "https://maps.app.goo.gl/xkVBrrgz3ac5bvCGA", rating: "4.6" },
+          { name: "Riche", type: "Chocolate Shop • Ice Cream Shop", link: "https://maps.app.goo.gl/M7crnZHtFCanuaTD8", rating: "4.3" },
+          { name: "Mamusia", type: "Chocolate Shop • Ice Cream Shop", link: "https://maps.app.goo.gl/aACSwvDrruNzUWaw9", rating: "4.5" },
+          { name: "Grido", type: "Ice Cream Shop", link: "https://maps.app.goo.gl/bcnxLZAnbNfV3hBx5", rating: "4.2" },
+          { name: "Heladería San Martín", type: "Ice Cream Shop", link: "https://maps.app.goo.gl/gQFMm54HDXA8qzwe7", rating: "4.5" },
           { name: "Pizza Cala", type: "Pizzeria", link: "https://maps.app.goo.gl/NmgTeax3D138rvcw8", rating: "4.4" },
           { name: "Genaro Pizza", type: "Pizzeria", link: "https://maps.app.goo.gl/H2P7YkbPHVCmd7aK6", rating: "4.4" },
           { name: "Gina Pizzeria", type: "Pizzeria", link: "https://maps.app.goo.gl/wiyf5ZhwaWmgperx7", rating: "4.6" },
@@ -500,6 +518,7 @@ const ContentEmergency = ({ t }: { t: typeof translations.es }) => (
 const ContentGuide = ({ t }: { t: typeof translations.es }) => {
   const [view, setView] = useState<"menu" | "benefits" | "gastronomy" | "activities" | "info">("menu")
   const [activeFilter, setActiveFilter] = useState<string | null>(null)
+  const [isFilterOpen, setIsFilterOpen] = useState(false)
 
   const menuItems = [
     { id: "benefits", label: t.guide.menu.benefits, icon: Ticket, color: "bg-red-100 dark:bg-red-950/50 text-red-600 dark:text-red-400", delay: 0 },
@@ -515,11 +534,40 @@ const ContentGuide = ({ t }: { t: typeof translations.es }) => {
     )
   )).sort()
 
-  const filteredGastronomyItems = activeFilter
-    ? t.guide.gastronomy.items.filter((item: any) => 
+  const filteredGastronomyItems = (() => {
+    if (activeFilter) {
+      return t.guide.gastronomy.items.filter((item: any) => 
         item.type.split("•").map((tag: string) => tag.trim()).includes(activeFilter)
       )
-    : t.guide.gastronomy.items
+    }
+    
+    // Default: Show 5 diverse items
+    const selected: any[] = []
+    const seenTypes = new Set<string>()
+    const items = t.guide.gastronomy.items
+
+    // First pass: try to get unique main types
+    for (const item of items) {
+      const mainType = item.type.split("•")[0].trim()
+      if (!seenTypes.has(mainType)) {
+        selected.push(item)
+        seenTypes.add(mainType)
+      }
+      if (selected.length === 5) break
+    }
+
+    // Second pass: fill up to 5 if needed
+    if (selected.length < 5) {
+      for (const item of items) {
+        if (!selected.includes(item)) {
+          selected.push(item)
+          if (selected.length === 5) break
+        }
+      }
+    }
+
+    return selected
+  })()
 
   const renderSubView = () => {
     const BackButton = () => (
@@ -563,33 +611,52 @@ const ContentGuide = ({ t }: { t: typeof translations.es }) => {
               {t.guide.gastronomy.title}
             </h2>
             
-            {/* Filters */}
-            <div className="flex overflow-x-auto pb-4 gap-2 mb-2 no-scrollbar">
+            {/* Filter Dropdown */}
+            <div className="relative mb-6 z-10">
               <button
-                onClick={() => setActiveFilter(null)}
-                className={cn(
-                  "px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors",
-                  activeFilter === null
-                    ? "bg-sky-600 text-white"
-                    : "bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700"
-                )}
+                onClick={() => setIsFilterOpen(!isFilterOpen)}
+                className="w-full flex items-center justify-between p-3 bg-neutral-100 dark:bg-neutral-800 rounded-xl text-left border border-transparent hover:border-neutral-200 dark:hover:border-neutral-700 transition-colors"
               >
-                {allLabel}
+                <div className="flex items-center gap-2">
+                   <span className="p-1.5 bg-sky-100 dark:bg-sky-900/50 text-sky-600 dark:text-sky-400 rounded-lg">
+                      <Utensils size={16} />
+                   </span>
+                   <span className="font-medium dark:text-white">
+                      {activeFilter || (t.guide.back === "Volver" ? "Recomendados (5)" : "Recommended (5)")}
+                   </span>
+                </div>
+                {isFilterOpen ? <ChevronUp size={20} className="text-neutral-500" /> : <ChevronDown size={20} className="text-neutral-500" />}
               </button>
-              {gastronomyTags.map((tag: string) => (
-                <button
-                  key={tag}
-                  onClick={() => setActiveFilter(tag === activeFilter ? null : tag)}
-                  className={cn(
-                    "px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors",
-                    activeFilter === tag
-                      ? "bg-sky-600 text-white"
-                      : "bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700"
-                  )}
-                >
-                  {tag}
-                </button>
-              ))}
+
+              <AnimatePresence>
+                {isFilterOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    className="absolute top-full left-0 right-0 mt-2 bg-white dark:bg-neutral-800 rounded-xl shadow-xl border border-neutral-200 dark:border-neutral-700 overflow-hidden max-h-60 overflow-y-auto z-20"
+                  >
+                    <button
+                      onClick={() => { setActiveFilter(null); setIsFilterOpen(false); }}
+                      className="w-full text-left px-4 py-3 hover:bg-neutral-50 dark:hover:bg-neutral-700 transition-colors border-b border-neutral-100 dark:border-neutral-800 text-neutral-800 dark:text-neutral-200"
+                    >
+                      {t.guide.back === "Volver" ? "Todos (Recomendados)" : "All (Recommended)"}
+                    </button>
+                    {gastronomyTags.map((tag: string) => (
+                      <button
+                        key={tag}
+                        onClick={() => { setActiveFilter(tag); setIsFilterOpen(false); }}
+                        className={cn(
+                          "w-full text-left px-4 py-3 hover:bg-neutral-50 dark:hover:bg-neutral-700 transition-colors",
+                          activeFilter === tag ? "font-medium text-sky-600 dark:text-sky-400 bg-sky-50 dark:bg-sky-900/20" : "text-neutral-600 dark:text-neutral-300"
+                        )}
+                      >
+                        {tag}
+                      </button>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
 
             <div className="grid gap-4">
