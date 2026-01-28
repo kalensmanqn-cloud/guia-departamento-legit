@@ -766,13 +766,21 @@ export default function Home() {
   const t = translations[lang]
 
   useEffect(() => {
-    // Check system preference
+    // Check system preference for Theme
     if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
       setTheme("dark")
       document.documentElement.classList.add("dark")
     } else {
       setTheme("light")
       document.documentElement.classList.add("light")
+    }
+
+    // Check system preference for Language
+    const userLang = navigator.language.toLowerCase()
+    if (userLang.startsWith("es")) {
+      setLang("es")
+    } else {
+      setLang("en")
     }
   }, [])
 
