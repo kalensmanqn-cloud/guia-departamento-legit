@@ -59,9 +59,8 @@ const translations = {
         "Por favor, respetar el horario de silencio (23 a 7).",
         "Cuidar utensilios y vajilla, en caso de faltantes y/o roturas, deberán ser abonados o repuestos.",
         "La limpieza de la cabaña no incluye el lavado de vajilla.",
-        "El cambio de toallas y toallones se realizará cada 4 noches de estadía.",
-        "El cambio de sábanas se realizará una vez a la semana (7 noches de estadía).",
-        "La limpieza general se realizará una vez a la semana, quedando a cargo del huésped el mantenimiento diario, con los elementos disponibles en la cabaña.",
+        "El recambio de sábanas, toallas y toallones se realizará una vez a la semana, a solicitud del huésped, en estadías superiores a 7 noches.",
+        "La limpieza general se realizará una vez a la semana a solicitud del huésped -en estadías mayores a 7 noches. El mantenimiento diario queda a cargo del huésped, con los elementos disponibles en el departamento.",
         "No desconectar el router del wifi.",
         "No deslizar la traba de la cerradura electrónica. En caso de requerir asistencia para desbloquearla, el huésped deberá abonar un cargo adicional.",
         "No modificar la posición de las llaves de paso del baño.",
@@ -77,7 +76,7 @@ const translations = {
       instructionsTitle: "Instrucciones de salida",
       instructions: [
         "El egreso es autónomo. Dejar las **llaves de ingreso** al edificio sobre la mesa.",
-        "Dejar **toallas y toallones** en el cesto de lavandería.",
+        "Dejar **toallas y toallones usados** en la bañera.",
         "No olvidar **sacar la basura** y dejarla en el cesto ubicado en la vereda."
       ]
     },
@@ -188,9 +187,8 @@ const translations = {
         "Please respect quiet hours (11 PM to 7 AM).",
         "Take care of utensils and dishes; missing or broken items must be paid for or replaced.",
         "Cabin cleaning does not include dishwashing.",
-        "Towels and bath towels will be changed every 4 nights of stay.",
-        "Bed sheets will be changed once a week (7 nights of stay).",
-        "General cleaning is done once a week; daily maintenance is the guest's responsibility using available supplies.",
+        "Sheets, towels and bath towels will be changed once a week, upon guest request, for stays longer than 7 nights.",
+        "General cleaning is done once a week upon guest request -for stays longer than 7 nights. Daily maintenance is the guest's responsibility using available supplies in the apartment.",
         "Do not disconnect the Wi-Fi router.",
         "Do not slide the electronic lock latch. If assistance is required to unlock it, an additional charge will apply.",
         "Do not modify the bathroom water valve positions.",
@@ -206,7 +204,7 @@ const translations = {
       instructionsTitle: "Departure Instructions",
       instructions: [
         "Self-checkout. Leave **building keys** on the table.",
-        "Leave **towels and bath towels** in the laundry basket.",
+        "Leave **used towels and bath towels** in the bathtub.",
         "Do not forget to **take out the trash** and leave it in the bin on the sidewalk."
       ]
     },
