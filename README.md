@@ -1,36 +1,70 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🏠 Guía de Departamento KALEN
 
-## Getting Started
+Una aplicación web de bienvenida para huéspedes del Departamento KALEN en San Martín de los Andes, Neuquén. Diseñada para reemplazar la clásica carpeta física de información con una experiencia digital moderna y accesible.
 
-First, run the development server:
+![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-38B2AC?logo=tailwind-css)
+
+## ✨ Características
+
+- 🌐 **Multilenguaje**: Soporte completo para Español e Inglés
+- 🌙 **Tema Oscuro/Claro**: Detecta preferencia del sistema automáticamente
+- 📱 **Responsive**: Optimizado para móviles, tablets y desktop
+- 🎨 **Animaciones fluidas**: Transiciones suaves con Framer Motion
+
+## 📋 Secciones
+
+| Sección | Descripción |
+|---------|-------------|
+| **Reglas de Convivencia** | Normas de la casa para una estadía armoniosa |
+| **Check-in / Check-out** | Horarios e instrucciones de ingreso y salida |
+| **WiFi** | Credenciales de red con botón de copiar |
+| **Tu Anfitrión** | Contacto directo vía WhatsApp y email |
+| **Emergencias** | Números de emergencia locales y dirección |
+| **Guía Turística** | Recomendaciones gastronómicas, actividades y mapa interactivo |
+| **Estacionamiento** | Información sobre el sistema de estacionamiento medido |
+
+## 🚀 Inicio Rápido
 
 ```bash
+# Instalar dependencias
+npm install
+
+# Ejecutar en desarrollo
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# Compilar para producción
+npm run build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abre [http://localhost:3000](http://localhost:3000) en tu navegador.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📁 Estructura del Proyecto
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+src/
+├── app/
+│   └── page.tsx              # Página principal
+├── components/
+│   ├── ui/                   # Componentes reutilizables (Modal, CopyButton)
+│   └── modals/               # Contenido de cada modal/sección
+├── lib/
+│   ├── translations.ts       # Textos en ES/EN
+│   ├── constants.ts          # Datos de categorías
+│   ├── types.ts              # Tipos TypeScript
+│   └── utils.ts              # Utilidades (cn)
+└── ...
+```
 
-## Learn More
+## 🛠️ Stack Tecnológico
 
-To learn more about Next.js, take a look at the following resources:
+- **Framework**: [Next.js 16](https://nextjs.org/) con App Router
+- **Lenguaje**: TypeScript
+- **Estilos**: Tailwind CSS v4
+- **Animaciones**: Framer Motion
+- **Iconos**: Lucide React
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📄 Licencia
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Proyecto privado - © 2026 Departamento KALEN
