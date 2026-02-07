@@ -26,7 +26,10 @@ import {
   Moon,
   Sun,
   ChevronDown,
-  ChevronUp
+  ChevronUp,
+  AlertTriangle,
+  Eye,
+  EyeOff
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -46,11 +49,22 @@ const translations = {
       wifi: "Wifi",
       host: "Tu Anfitrión",
       emergency: "Emergencias",
-      guide: "Guía Turística"
+      guide: "Guía Turística",
+      parking: "Estacionamiento Medido"
     },
     footer: "© 2026 Guía de Alojamiento",
     comingSoon: "Disponible próximamente",
     copy: "Copiar",
+    parking: {
+      title: "Estacionamiento Medido",
+      description: "La ciudad cuenta con sistema de estacionamiento medido.",
+      schedule: [
+        "Lunes a Viernes: 8 hs a 20 hs",
+        "Sábados: 8 hs a 13 hs"
+      ],
+      moreInfo: "Para mayor información ingresar a:",
+      link: "https://saemsmandes.com.ar/"
+    },
     rules: {
       title: "Reglas de la casa",
       items: [
@@ -113,9 +127,9 @@ const translations = {
       gastronomy: {
         title: "Gastronomía",
         items: [
-          { name: "Próspero", type: "Restaurante", link: "https://maps.app.goo.gl/od3RoZE9LrfUbAPZ9", rating: "5.0" },
-          { name: "Vieja Deli", type: "Restaurante • Café", link: "https://maps.app.goo.gl/qUJk5ppyGcVuYn54A", rating: "4.4" },
-          { name: "Unser Traum", type: "Café", rating: "3.8", branches: [
+          { name: "Próspero", type: "Restaurante", link: "https://maps.app.goo.gl/od3RoZE9LrfUbAPZ9", rating: "5.0", recommended: true },
+          { name: "Vieja Deli", type: "Restaurante • Café", link: "https://maps.app.goo.gl/qUJk5ppyGcVuYn54A", rating: "4.4", recommended: true },
+          { name: "Unser Traum", type: "Café", rating: "3.8", recommended: true, branches: [
             { name: "Suc. San Martín", link: "https://maps.app.goo.gl/zEU6d2VRagr13GUh6" },
             { name: "Suc. Roca", link: "https://maps.app.goo.gl/yinYKqgcAzVXYkgKA" }
           ]},
@@ -123,11 +137,11 @@ const translations = {
           { name: "Pantera Bar Bistro", type: "Bar • Restaurante • Sushi", link: "https://maps.app.goo.gl/n1NfFaQxvWFLXuwL6", rating: "4.7" },
           { name: "Dublin South Pub", type: "Bar • Café • Restaurante", link: "https://maps.app.goo.gl/emeAhms196HWYyu29", rating: "3.5" },
           { name: "Ulises", type: "Restaurante", link: "https://maps.app.goo.gl/P1g7iWjiTw79Tm6m9", rating: "4.6" },
-          { name: "Piscis Parrilla", type: "Parrilla", rating: "4.1", branches: [
+          { name: "Piscis Parrilla", type: "Parrilla", rating: "4.1", recommended: true, branches: [
             { name: "Suc. Mariano Moreno", link: "https://maps.app.goo.gl/6NCQBK8nLynEvKiL7" },
             { name: "Suc. Belgrano", link: "https://maps.app.goo.gl/4dtidiWw2TEPbw3w7" }
           ]},
-          { name: "La Vieja Aldea", type: "Chocolatería", link: "https://maps.app.goo.gl/BPJ7QcuvU8HHWbNv6", rating: "4.8" },
+          { name: "La Vieja Aldea", type: "Chocolatería", link: "https://maps.app.goo.gl/BPJ7QcuvU8HHWbNv6", rating: "4.8", recommended: true },
           { name: "Mamuschka", type: "Chocolatería • Heladería", link: "https://maps.app.goo.gl/xZom5UJynhuuySuT7", rating: "4.7" },
           { name: "DELTURISTA", type: "Chocolatería • Heladería", link: "https://maps.app.goo.gl/NN158AZY5wz9ZJeEA", rating: "4.4" },
           { name: "Pata Negra", type: "Chocolatería • Heladería", link: "https://maps.app.goo.gl/xkVBrrgz3ac5bvCGA", rating: "4.6" },
@@ -174,11 +188,22 @@ const translations = {
       wifi: "Wifi",
       host: "Your Host",
       emergency: "Emergency",
-      guide: "Tourist Guide"
+      guide: "Tourist Guide",
+      parking: "Measured Parking"
     },
     footer: "© 2026 Accommodation Guide",
     comingSoon: "Coming soon",
     copy: "Copy",
+    parking: {
+      title: "Measured Parking",
+      description: "The city has a measured parking system.",
+      schedule: [
+        "Monday to Friday: 8 AM to 8 PM",
+        "Saturdays: 8 AM to 1 PM"
+      ],
+      moreInfo: "For more information visit:",
+      link: "https://saemsmandes.com.ar/"
+    },
     rules: {
       title: "House Rules",
       items: [
@@ -241,9 +266,9 @@ const translations = {
       gastronomy: {
         title: "Gastronomy",
         items: [
-          { name: "Próspero", type: "Restaurant", link: "https://maps.app.goo.gl/od3RoZE9LrfUbAPZ9", rating: "5.0" },
-          { name: "Vieja Deli", type: "Restaurant • Cafe", link: "https://maps.app.goo.gl/qUJk5ppyGcVuYn54A", rating: "4.4" },
-          { name: "Unser Traum", type: "Cafe", rating: "3.8", branches: [
+          { name: "Próspero", type: "Restaurant", link: "https://maps.app.goo.gl/od3RoZE9LrfUbAPZ9", rating: "5.0", recommended: true },
+          { name: "Vieja Deli", type: "Restaurant • Cafe", link: "https://maps.app.goo.gl/qUJk5ppyGcVuYn54A", rating: "4.4", recommended: true },
+          { name: "Unser Traum", type: "Cafe", rating: "3.8", recommended: true, branches: [
             { name: "Br. San Martín", link: "https://maps.app.goo.gl/zEU6d2VRagr13GUh6" },
             { name: "Br. Roca", link: "https://maps.app.goo.gl/yinYKqgcAzVXYkgKA" }
           ]},
@@ -251,11 +276,11 @@ const translations = {
           { name: "Pantera Bar Bistro", type: "Bar • Restaurant • Sushi", link: "https://maps.app.goo.gl/n1NfFaQxvWFLXuwL6", rating: "4.7" },
           { name: "Dublin South Pub", type: "Bar • Cafe • Restaurant", link: "https://maps.app.goo.gl/emeAhms196HWYyu29", rating: "3.5" },
           { name: "Ulises", type: "Restaurant", link: "https://maps.app.goo.gl/P1g7iWjiTw79Tm6m9", rating: "4.6" },
-          { name: "Piscis Parrilla", type: "Grill", rating: "4.1", branches: [
+          { name: "Piscis Parrilla", type: "Grill", rating: "4.1", recommended: true, branches: [
             { name: "Br. Mariano Moreno", link: "https://maps.app.goo.gl/6NCQBK8nLynEvKiL7" },
             { name: "Br. Belgrano", link: "https://maps.app.goo.gl/4dtidiWw2TEPbw3w7" }
           ]},
-          { name: "La Vieja Aldea", type: "Chocolate Shop", link: "https://maps.app.goo.gl/BPJ7QcuvU8HHWbNv6", rating: "4.8" },
+          { name: "La Vieja Aldea", type: "Chocolate Shop", link: "https://maps.app.goo.gl/BPJ7QcuvU8HHWbNv6", rating: "4.8", recommended: true },
           { name: "Mamuschka", type: "Chocolate Shop • Ice Cream Shop", link: "https://maps.app.goo.gl/xZom5UJynhuuySuT7", rating: "4.7" },
           { name: "DELTURISTA", type: "Chocolate Shop • Ice Cream Shop", link: "https://maps.app.goo.gl/NN158AZY5wz9ZJeEA", rating: "4.4" },
           { name: "Pata Negra", type: "Chocolate Shop • Ice Cream Shop", link: "https://maps.app.goo.gl/xkVBrrgz3ac5bvCGA", rating: "4.6" },
@@ -295,7 +320,7 @@ const translations = {
 
 // --- Data ---
 
-type CategoryId = "rules" | "checkin" | "wifi" | "host" | "emergency" | "guide"
+type CategoryId = "rules" | "checkin" | "wifi" | "host" | "emergency" | "guide" | "parking"
 
 interface Category {
   id: CategoryId
@@ -411,33 +436,47 @@ const ContentCheckin = ({ t }: { t: typeof translations.es }) => (
   </div>
 )
 
-const ContentWifi = ({ t }: { t: typeof translations.es }) => (
-  <div className="space-y-6">
-    <h2 className="text-2xl font-bold dark:text-white">{t.wifi.title}</h2>
-    <div className="bg-emerald-50 dark:bg-emerald-950/30 p-6 rounded-2xl border border-emerald-100 dark:border-emerald-900/50">
-      <div className="space-y-4">
-        <div>
-          <div className="text-xs font-semibold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 mb-1">{t.wifi.network}</div>
-          <div className="flex items-center text-xl font-bold text-emerald-900 dark:text-emerald-200">
-            <span>cotemax_3a1</span>
-            <CopyButton text="cotemax_3a1" label={t.copy} />
+const ContentWifi = ({ t }: { t: typeof translations.es }) => {
+  const [showPassword, setShowPassword] = useState(false)
+
+  return (
+    <div className="space-y-6">
+      <h2 className="text-2xl font-bold dark:text-white">{t.wifi.title}</h2>
+      <div className="bg-emerald-50 dark:bg-emerald-950/30 p-6 rounded-2xl border border-emerald-100 dark:border-emerald-900/50">
+        <div className="space-y-4">
+          <div>
+            <div className="text-xs font-semibold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 mb-1">{t.wifi.network}</div>
+            <div className="flex items-center text-xl font-bold text-emerald-900 dark:text-emerald-200">
+              <span>cotemax_3a1</span>
+              <CopyButton text="cotemax_3a1" label={t.copy} />
+            </div>
           </div>
-        </div>
-        <div className="w-full h-px bg-emerald-200 dark:bg-emerald-900/50" />
-        <div>
-          <div className="text-xs font-semibold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 mb-1">{t.wifi.password}</div>
-          <div className="flex items-center text-xl font-bold text-emerald-900 dark:text-emerald-200">
-            <span>cote035b</span>
-            <CopyButton text="cote035b" label={t.copy} />
+          <div className="w-full h-px bg-emerald-200 dark:bg-emerald-900/50" />
+          <div>
+            <div className="text-xs font-semibold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 mb-1">{t.wifi.password}</div>
+            <div className="flex items-center gap-3">
+              <span className="text-xl font-bold text-emerald-900 dark:text-emerald-200 min-w-[100px]">
+                {showPassword ? "cote035b" : "••••••••"}
+              </span>
+              <button
+                onClick={() => setShowPassword(!showPassword)}
+                className="p-1.5 rounded-md hover:bg-emerald-100 dark:hover:bg-emerald-900/50 text-emerald-600 dark:text-emerald-400 transition-colors"
+                title={showPassword ? "Ocultar" : "Mostrar"}
+              >
+                {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+              </button>
+              {showPassword && (
+                <div className="ml-1">
+                  <CopyButton text="cote035b" label={t.copy} />
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
     </div>
-    {/* <p className="text-center text-sm text-neutral-500 dark:text-neutral-400">
-      {t.wifi.scan}
-    </p> */}
-  </div>
-)
+  )
+}
 
 const ContentHost = ({ t }: { t: typeof translations.es }) => (
   <div className="space-y-6">
@@ -513,6 +552,40 @@ const ContentEmergency = ({ t }: { t: typeof translations.es }) => (
   </div>
 )
 
+const ContentParking = ({ t }: { t: typeof translations.es }) => (
+  <div className="space-y-6">
+    <h2 className="text-2xl font-bold dark:text-white flex items-center gap-3">
+      <AlertTriangle className="text-amber-500" size={28} />
+      {t.parking.title}
+    </h2>
+    <div className="bg-amber-50 dark:bg-amber-950/30 p-6 rounded-2xl border border-amber-100 dark:border-amber-900/50 space-y-4">
+      <p className="font-medium text-amber-900 dark:text-amber-200">
+        {t.parking.description}
+      </p>
+      <ul className="space-y-2">
+        {t.parking.schedule.map((item, i) => (
+          <li key={i} className="flex items-center gap-2 text-amber-800 dark:text-amber-300">
+            <Clock size={16} />
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+    <div className="text-center">
+      <p className="text-neutral-600 dark:text-neutral-400 mb-2">{t.parking.moreInfo}</p>
+      <a 
+        href={t.parking.link} 
+        target="_blank" 
+        rel="noopener noreferrer"
+        className="inline-flex items-center gap-2 text-blue-600 dark:text-blue-400 font-medium hover:underline"
+      >
+        <span>saemsmandes.com.ar</span>
+        <ArrowLeft size={16} className="rotate-180" />
+      </a>
+    </div>
+  </div>
+)
+
 const ContentGuide = ({ t }: { t: typeof translations.es }) => {
   const [view, setView] = useState<"menu" | "benefits" | "gastronomy" | "activities" | "info">("menu")
   const [activeFilter, setActiveFilter] = useState<string | null>(null)
@@ -539,32 +612,8 @@ const ContentGuide = ({ t }: { t: typeof translations.es }) => {
       )
     }
     
-    // Default: Show 5 diverse items
-    const selected: any[] = []
-    const seenTypes = new Set<string>()
-    const items = t.guide.gastronomy.items
-
-    // First pass: try to get unique main types
-    for (const item of items) {
-      const mainType = item.type.split("•")[0].trim()
-      if (!seenTypes.has(mainType)) {
-        selected.push(item)
-        seenTypes.add(mainType)
-      }
-      if (selected.length === 5) break
-    }
-
-    // Second pass: fill up to 5 if needed
-    if (selected.length < 5) {
-      for (const item of items) {
-        if (!selected.includes(item)) {
-          selected.push(item)
-          if (selected.length === 5) break
-        }
-      }
-    }
-
-    return selected
+    // Default: Show recommended items
+    return t.guide.gastronomy.items.filter((item: any) => item.recommended)
   })()
 
   const renderSubView = () => {
@@ -741,16 +790,11 @@ const ContentGuide = ({ t }: { t: typeof translations.es }) => {
               </span>
               {t.guide.activities.title}
             </h2>
-            <div className="grid gap-4">
-              {t.guide.activities.items.map((item, i) => (
-                <div key={i} className="p-4 bg-neutral-50 dark:bg-neutral-800 rounded-xl">
-                  <h3 className="font-bold text-lg dark:text-white">{item.name}</h3>
-                  <div className="flex gap-3 mt-2 text-sm text-neutral-500 dark:text-neutral-400">
-                    <span className="flex items-center gap-1"><MapIcon size={14} /> {item.difficulty}</span>
-                    <span className="flex items-center gap-1"><Clock size={14} /> {item.duration}</span>
-                  </div>
-                </div>
-              ))}
+            <div className="flex flex-col items-center justify-center py-12 text-center space-y-4">
+               <div className="p-4 bg-neutral-100 dark:bg-neutral-800 text-neutral-400 rounded-full">
+                 <Clock size={48} />
+               </div>
+               <p className="text-neutral-500 dark:text-neutral-400 font-medium">{t.comingSoon}</p>
             </div>
           </div>
         )
@@ -869,6 +913,7 @@ export default function Home() {
       case "host": return <ContentHost t={t} />
       case "emergency": return <ContentEmergency t={t} />
       case "guide": return <ContentGuide t={t} />
+      case "parking": return <ContentParking t={t} />
       default: return null
     }
   }
@@ -929,7 +974,7 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
               onClick={() => setActiveId(category.id)}
-              className="bg-white dark:bg-neutral-900 p-6 rounded-2xl shadow-lg hover:shadow-xl dark:shadow-neutral-900/50 transition-all flex flex-col items-center justify-center gap-4 text-center aspect-square md:aspect-auto md:h-48 group"
+              className="bg-white dark:bg-neutral-900 p-6 rounded-2xl shadow-lg hover:shadow-xl dark:shadow-neutral-900/50 transition-all flex flex-col items-center justify-center gap-4 text-center aspect-square md:aspect-auto md:h-48 group cursor-pointer"
             >
               <div className={cn("p-4 rounded-full transition-transform group-hover:scale-110 duration-300", 
                 category.color,
@@ -941,6 +986,20 @@ export default function Home() {
             </motion.button>
           ))}
         </div>
+
+        {/* Parking Info Button */}
+        <motion.button
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6 }}
+          onClick={() => setActiveId("parking")}
+          className="w-full mt-6 bg-orange-50 dark:bg-orange-950/30 border border-orange-200 dark:border-orange-800/50 p-4 rounded-xl flex items-center justify-center gap-3 text-orange-800 dark:text-orange-200 hover:bg-orange-100 dark:hover:bg-orange-900/50 transition-all cursor-pointer group shadow-sm hover:shadow-md"
+        >
+          <div className="p-2 bg-orange-100 dark:bg-orange-900/50 rounded-full group-hover:scale-110 transition-transform">
+            <AlertTriangle size={20} className="text-orange-600 dark:text-orange-400" />
+          </div>
+          <span className="font-semibold text-lg">{t.categories.parking}</span>
+        </motion.button>
       </div>
 
       {/* Footer */}
